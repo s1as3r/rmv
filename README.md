@@ -7,3 +7,5 @@ I mainly use this for batch renaming files.
 ## Usage
 
 Check `rmv --help`
+
+![Example Usage](./media/usage.gif)

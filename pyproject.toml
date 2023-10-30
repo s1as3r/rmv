@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "rmv"
+version = "0.1.0"
+description = "regular expression mv"
+authors = ["Arbaaz Shafiq <arbaazshafiq@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.scripts]
+rmv = "rmv.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
