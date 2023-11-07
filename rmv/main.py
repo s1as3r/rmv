@@ -15,7 +15,7 @@ def main():
     if args.verbose:
         logger.setLevel(logging.DEBUG)
 
-    move_files(args.src, args.dest, args.interactive, args.insensitive)
+    move_files(args.src, args.dest, args.interactive, args.insensitive, args.dry_run)
 
 
 def move_files(
@@ -23,6 +23,7 @@ def move_files(
     dest: str,
     interactive: bool = False,
     case_insensitive: bool = False,
+    dry_run: bool = False,
 ):
     """
     regex move `src` to `dest`
@@ -60,9 +61,12 @@ def move_files(
         src_file = os.path.join(src_dir, file)
         dest_file = os.path.join(dest_dir, src_file_re.sub(dest_file_re, file))
 
-        should_move = True
-        if interactive:
+        should_move = not dry_run
+
+        if interactive or dry_run:
             print(f"{src_file} --> {dest_file}")
+
+        if interactive:
             if input("y/n: ")[0].lower() != "y":
                 should_move = False
 
@@ -86,6 +90,7 @@ def get_parser() -> ArgumentParser:
     )
     parser.add_argument("--insensitive", "-i", action="store_true", help="ignore case")
     parser.add_argument("--verbose", "-v", action="store_true", help="print each move")
+    parser.add_argument("--dry-run", "-d", action="store_true", help="dry run")
 
     return parser
 
