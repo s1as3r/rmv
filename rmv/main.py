@@ -15,7 +15,9 @@ def main():
     if args.verbose:
         logger.setLevel(logging.DEBUG)
 
-    move_files(args.src, args.dest, args.interactive, args.insensitive, args.dry_run)
+    move_files(
+        args.src, args.dest, args.interactive, args.case_insensitive, args.dry_run
+    )
 
 
 def move_files(
@@ -86,9 +88,11 @@ def get_parser() -> ArgumentParser:
     parser.add_argument("src", metavar="SRC", help="source regex", type=str)
     parser.add_argument("dest", metavar="DEST", help="destination regex", type=str)
     parser.add_argument(
-        "--interactive", "-a", action="store_true", help="run interactively"
+        "--interactive", "-i", action="store_true", help="run interactively"
     )
-    parser.add_argument("--insensitive", "-i", action="store_true", help="ignore case")
+    parser.add_argument(
+        "--case-insensitive", "-c", action="store_true", help="ignore case"
+    )
     parser.add_argument("--verbose", "-v", action="store_true", help="print each move")
     parser.add_argument("--dry-run", "-d", action="store_true", help="dry run")
 
